@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :client do
+    name "Hanshi Recruitment"
   end
 end

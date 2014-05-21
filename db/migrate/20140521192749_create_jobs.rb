@@ -5,7 +5,7 @@ class CreateJobs < ActiveRecord::Migration
       t.float :min_payrate
       t.float :max_payrate
       t.date :start_date
-      f.date :end_date
+      t.date :end_date
       t.string :location
       t.string :sector
       t.text :job_description
