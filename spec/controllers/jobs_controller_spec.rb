@@ -24,10 +24,8 @@ describe JobsController, :type => :controller do
   # JobsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  before do
-    job = build(:job)
-    valid_attributes = job.attributes
-  end
+   let(:job) { job = FactoryGirl.build(:job)}
+   let(:valid_attributes) { FactoryGirl.attributes_for(:job) }
 
   describe "GET index" do
     it "assigns all jobs as @jobs" do
@@ -81,14 +79,14 @@ describe JobsController, :type => :controller do
       it "assigns a newly created but unsaved job as @job" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Job).to receive(:save).and_return(false)
-        post :create, {:job => { "title" => "invalid value" }}, valid_session
+        post :create, {:job => { "job_title" => "invalid value" }}, valid_session
         expect(assigns(:job)).to be_a_new(Job)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Job).to receive(:save).and_return(false)
-        post :create, {:job => { "title" => "invalid value" }}, valid_session
+        post :create, {:job => { "job_title" => "" }}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -103,7 +101,7 @@ describe JobsController, :type => :controller do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         expect_any_instance_of(Job).to receive(:update).with({ "title" => "MyString" })
-        put :update, {:id => job.to_param, :job => { "title" => "MyString" }}, valid_session
+        put :update, {:id => job.to_param, :job => { "job_title" => "MyString" }}, valid_session
       end
 
       it "assigns the requested job as @job" do
