@@ -19,20 +19,18 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe JobsController, :type => :controller do
-
-  # This should return the minimal set of attributes required to create a valid
-  # Job. As you add validations to Job, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "title" => "MyString" } }
-
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # JobsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before do
+    job = build(:job)
+    valid_attributes = job.attributes
+  end
+
   describe "GET index" do
     it "assigns all jobs as @jobs" do
-      job = Job.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:jobs)).to eq([job])
     end
@@ -40,8 +38,7 @@ describe JobsController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested job as @job" do
-      job = Job.create! valid_attributes
-      get :show, {:id => job.to_param}, valid_session
+      get :show, {:id => job.id}, valid_session
       expect(assigns(:job)).to eq(job)
     end
   end
@@ -55,8 +52,7 @@ describe JobsController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested job as @job" do
-      job = Job.create! valid_attributes
-      get :edit, {:id => job.to_param}, valid_session
+      get :edit, {:id => job.id}, valid_session
       expect(assigns(:job)).to eq(job)
     end
   end
