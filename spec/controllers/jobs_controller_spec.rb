@@ -57,7 +57,7 @@ describe JobsController, :type => :controller do
 
   describe "POST create" do
     describe "with valid params" do
-      before { job = FactoryGirl.build(:job).attributes }
+      before { job = FactoryGirl.create(:job).attributes }
 
       it "creates a new Job" do
         expect { FactoryGirl.create(:job).attributes 
