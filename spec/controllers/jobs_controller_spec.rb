@@ -57,20 +57,18 @@ describe JobsController, :type => :controller do
 
   describe "POST create" do
     describe "with valid params" do
+      before { job = FactoryGirl.build(:job).attributes }
+
       it "creates a new Job" do
-        expect {
-          post :create, {:job => valid_attributes}, valid_session
+        expect { FactoryGirl.create(:job).attributes 
         }.to change(Job, :count).by(1)
       end
 
       it "assigns a newly created job as @job" do
-        post :create, {:job => valid_attributes}, valid_session
         expect(assigns(:job)).to be_a(Job)
-        expect(assigns(:job)).to be_persisted
       end
 
       it "redirects to the created job" do
-        post :create, {:job => valid_attributes}, valid_session
         expect(response).to redirect_to(Job.last)
       end
     end
@@ -79,7 +77,7 @@ describe JobsController, :type => :controller do
       it "assigns a newly created but unsaved job as @job" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Job).to receive(:save).and_return(false)
-        post :create, {:job => { "job_title" => "invalid value" }}, valid_session
+        post :create, {:job => { "job_title" => "" }}, valid_session
         expect(assigns(:job)).to be_a_new(Job)
       end
 
@@ -100,7 +98,7 @@ describe JobsController, :type => :controller do
         # specifies that the Job created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Job).to receive(:update).with({ "title" => "MyString" })
+        expect_any_instance_of(Job).to receive(:update).with({ "job_title" => "MyString" })
         put :update, {:id => job.to_param, :job => { "job_title" => "MyString" }}, valid_session
       end
 
