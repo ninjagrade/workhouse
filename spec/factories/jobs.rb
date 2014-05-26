@@ -10,7 +10,7 @@ FactoryGirl.define do
     location "North London"
     sector "Admin"
     job_description "Commercial Development Executive Leicester to 40k + Bonus + Car Allowance An excellent opportunity is available with a leading insurance intermediary now seeking to hire into its Leicester team after a successful period of growth"
-    client_id 4
+    client_id 1
   end
 end
 
